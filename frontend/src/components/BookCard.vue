@@ -41,11 +41,12 @@ const coverUrl =
         >
           {{ book.first_publish_year || "-" }}
         </span>
-        <button
+        <router-link
+          :to="`/book/${book.key.replace('/works/', '')}`"
           class="text-primary text-sm font-medium hover:text-[#21867a] transition-colors"
         >
           Detail
-        </button>
+        </router-link>
       </div>
     </div>
   </div>
