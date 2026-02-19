@@ -50,3 +50,49 @@ Pastikan kamu telah menginstal perangkat lunak berikut di sistem komputermu:
    git clone [https://github.com/username-kamu/nama-repo-kamu.git](https://github.com/username-kamu/nama-repo-kamu.git)
    cd nama-repo-kamu
    ```
+2. **Pengaturan Backendi**
+
+   ```bash
+   cd backend
+   npm install
+   ```
+
+   Buat file .env di direktori backend dan sesuaikan kredensial database PostgreSQL kamu:
+
+   ```bash
+   Cuplikan kode
+   PORT=3000
+   DB_HOST=localhost
+   DB_USER=postgres
+   DB_PASSWORD=password_kamu
+   DB_NAME=book_review_db
+   DB_PORT=5432
+   ```
+
+3. **Pengaturan Frontend (Vue.js)**
+
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. **Menjalankan Aplikasi**
+   - Jalankan server backend:
+
+   ```bash
+   cd backend
+   npm run dev
+   ```
+
+   -Jalankan server frontend:
+
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+**👨‍💻 Penulis**
+
+Agung - Full-Stack Developer
+
+_Dibuat untuk keperluan pembelajaran dan pengembangan portofolio Software Engineering._

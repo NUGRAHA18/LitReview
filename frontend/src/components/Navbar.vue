@@ -3,7 +3,7 @@
 </script>
 <template>
   <nav
-    class="bg-white px-6 py-4 flex items-center justify-between shadow-sm sticky top-0 z-50"
+    class="bg-white px-6 py-4 flex items-center justify-around shadow-sm sticky top-0 z-50"
   >
     <div class="text-2xl font-bold text-dark tracking-tight">
       Lit<span class="text-primary">Review</span>
