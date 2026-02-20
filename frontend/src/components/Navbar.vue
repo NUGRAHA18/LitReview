@@ -16,16 +16,18 @@
     </div>
 
     <div class="space-x-4 flex items-center">
-      <button
+      <router-link
+        to="/login"
         class="text-slate-600 font-medium hover:text-dark transition-colors"
       >
         Login
-      </button>
-      <button
+      </router-link>
+      <router-link
+        to="/register"
         class="bg-primary hover:bg-[#21867a] text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm"
       >
         Sign Up
-      </button>
+      </router-link>
     </div>
   </nav>
 </template>
