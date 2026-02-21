@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import pool from "../config/database.js";
 
-//Register
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
 

@@ -2,8 +2,10 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { loginUser } from "../services/api";
+import { useAuth } from "../stores/auth";
 
 const router = useRouter();
+const { setSession } = useAuth();
 const form = ref({ email: "", password: "" });
 const errorMessage = ref("");
 const isLoading = ref(false);
@@ -13,20 +15,16 @@ const handleLogin = async () => {
     isLoading.value = true;
     errorMessage.value = "";
 
-    // Memanggil API Login
     const response = await loginUser(form.value);
-    console.log(form);
 
-    // Menyimpan token akses ke penyimpanan lokal browser (LocalStorage)
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data.user));
+    // Gunakan setSession agar seluruh aplikasi tahu user sudah login
+    setSession(response.data.token, response.data.user);
 
     alert("Login berhasil!");
-    router.push("/"); // Arahkan kembali ke halaman utama
+    router.push("/");
   } catch (error) {
-    // Menangkap pesan error dari backend
     errorMessage.value =
-      error.response?.data?.message || "Terjadi kesalahan saat login.";
+      error.response?.data?.message || "Terjadi kesalahan sistem saat login.";
   } finally {
     isLoading.value = false;
   }

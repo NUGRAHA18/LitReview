@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getBookDetails, getCoverUrl } from "../services/api.js";
+import ReviewSection from "../components/ReviewSection.vue";
 
 const route = useRoute();
 const book = ref(null);
@@ -71,6 +72,7 @@ const getDescription = (desc) => {
             &larr; Kembali ke Katalog
           </router-link>
         </div>
+        <ReviewSection :bookId="route.params.id" />
       </div>
     </div>
 

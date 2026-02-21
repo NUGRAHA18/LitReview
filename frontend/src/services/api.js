@@ -1,16 +1,13 @@
 import axios from "axios";
 
-// instance axios OpenLibrary
 const openLibraryAPI = axios.create({
   baseURL: "https://openlibrary.org",
 });
 
-// Instance axios untuk Backend Lokal
-export const backendAPI = axios.create({
-  baseURL: "http:localhost:5000/api",
+const backendAPI = axios.create({
+  baseURL: "http://localhost:5000/api",
 });
 
-//Login
 export const loginUser = async (userData) => {
   return await backendAPI.post("/auth/login", userData);
 };
@@ -19,10 +16,8 @@ export const registerUser = async (userData) => {
   return await backendAPI.post("/auth/register", userData);
 };
 
-//Fungsi untuk mencari buku berdasarkan judul
 export const searchBooks = async (query) => {
   try {
-    //Membatasi hasil 5 buku saja untuk testing
     const response = await openLibraryAPI.get(
       `/search.json?title=${query}&limit=5`,
     );
@@ -33,7 +28,6 @@ export const searchBooks = async (query) => {
   }
 };
 
-//Fungsi pembantu untuk mendapatkan URL cover buku yang beresolusi medium (M)
 export const getCoverUrl = (coverId) => {
   return coverId
     ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`
@@ -48,4 +42,18 @@ export const getBookDetails = async (workId) => {
     console.error("Gagal mengambil detail buku:", error);
     return null;
   }
+};
+
+export const getBookReviews = async (bookId) => {
+  return await backendAPI.get(`/reviews/${bookId}`);
+};
+
+export const addReview = async (reviewData) => {
+  const token = localStorage.getItem("token");
+
+  return await backendAPI.post("/reviews", reviewData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
