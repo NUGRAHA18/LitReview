@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useAuth } from "../stores/auth";
 import { addReview, getBookReviews } from "../services/api";
+import { toast } from "vue3-toastify";
 
 const props = defineProps({
   bookId: { type: String, required: true },
@@ -42,9 +43,9 @@ const submitReview = async () => {
     newReview.value.rating = 5;
     await fetchReviews();
 
-    alert("Ulasan berhasil ditambahkan!");
+    toast.success("Ulasan berhasil ditambahkan!");
   } catch (error) {
-    alert(error.response?.data?.message || "Gagal mengirim ulasan");
+    toast.error(error.response?.data?.message || "Gagal mengirim ulasan");
   } finally {
     isSubmitting.value = false;
   }

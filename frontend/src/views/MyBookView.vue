@@ -1,6 +1,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { getMyReadingList, getBookDetails, getCoverUrl } from "../services/api";
+import {
+  getMyReadingList,
+  getBookDetails,
+  getCoverUrl,
+  removeFromReadingList,
+} from "../services/api";
+import { toast } from "vue3-toastify";
 
 const readingList = ref([]);
 const isLoading = ref(true);
@@ -25,6 +31,16 @@ const fetchMyBooks = async () => {
     console.error("Gagal memuat rak buku", error);
   } finally {
     isLoading.value = false;
+  }
+};
+
+const removeBook = async (bookId) => {
+  if (confirm("Hapus buku ini dari koleksimu ? ")) {
+    try {
+      readingList.value = readingList.value.filter((b) => b.book_id !== bookId);
+    } catch (error) {
+      toast.error("Gagal menghapus buku");
+    }
   }
 };
 
@@ -101,6 +117,12 @@ onMounted(() => {
               Lihat Detail &rarr;
             </router-link>
           </div>
+          <button
+            @click="removeBook(book.book_id)"
+            class="text-xs text-red-400 hover:text-red-600 transition-colors"
+          >
+            Hapus
+          </button>
         </div>
       </div>
     </div>

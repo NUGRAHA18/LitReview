@@ -1,14 +1,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useAuth } from "../stores/auth";
-import { updateBookReadingStatus, getMyReadingList } from "../services/api";
+import {
+  updateBookReadingStatus,
+  getMyReadingList,
+  removeFromReadingList,
+} from "../services/api";
+import { toast } from "vue3-toastify";
 
 const props = defineProps({
   bookId: { type: String, required: true },
 });
 
 const { isAuthenticated } = useAuth();
-const currentStatus = ref(""); // Menyimpan status buku saat ini
+const currentStatus = ref("");
 const isLoading = ref(false);
 
 // Mengecek status buku ini di rak user saat komponen dimuat
@@ -36,10 +41,15 @@ const handleStatusChange = async () => {
 
   isLoading.value = true;
   try {
-    await updateBookReadingStatus(props.bookId, currentStatus.value);
-    alert("Rak buku berhasil diperbarui!");
+    if (currentStatus.value === "remove") {
+      await removeFromReadingList(props.bookId);
+      toast.success("Buku dihapus dari koleksi");
+    } else {
+      await updateBookReadingStatus(props.bookId, currentStatus.value);
+      toast.success("Rak buku berhasil diperbarui!");
+    }
   } catch (error) {
-    alert("Gagal memperbarui rak buku.");
+    toast.error("Gagal memperbarui rak buku.");
   } finally {
     isLoading.value = false;
   }
@@ -64,7 +74,7 @@ onMounted(() => {
       <option value="" disabled>+ Tambah ke Rak Buku</option>
       <option value="want_to_read">📖 Ingin Dibaca</option>
       <option value="reading">⏳ Sedang Dibaca</option>
-      <option value="finished">✅ Selesai Dibaca</option>
+      <option value="remove">❌ Hapus dari Koleksi</option>
     </select>
   </div>
 </template>

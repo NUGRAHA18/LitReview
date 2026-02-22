@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { loginUser } from "../services/api";
 import { useAuth } from "../stores/auth";
+import { toast } from "vue3-toastify";
 
 const router = useRouter();
 const { setSession } = useAuth();
@@ -20,7 +21,7 @@ const handleLogin = async () => {
     // Gunakan setSession agar seluruh aplikasi tahu user sudah login
     setSession(response.data.token, response.data.user);
 
-    alert("Login berhasil!");
+    toast.success("Login berhasil!");
     router.push("/");
   } catch (error) {
     errorMessage.value =
