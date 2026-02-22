@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getBookDetails, getCoverUrl } from "../services/api.js";
 import ReviewSection from "../components/ReviewSection.vue";
+import ReadingListButton from "../components/ReadingListButton.vue";
 
 const route = useRoute();
 const book = ref(null);
@@ -43,6 +44,7 @@ const getDescription = (desc) => {
           :alt="book.title"
           class="w-full rounded-xl shadow-lg object-cover border border-slate-100"
         />
+        <ReadingListButton :bookId="route.params.id" />
       </div>
 
       <div class="flex-1 space-y-6">
@@ -55,6 +57,7 @@ const getDescription = (desc) => {
           <p v-if="book.first_publish_date" class="text-lg text-slate-500 mt-2">
             Terbitan Pertama: {{ book.first_publish_date }}
           </p>
+          <ReadingListButton :bookId="route.params.id" />
         </div>
 
         <div class="prose max-w-none text-slate-600">

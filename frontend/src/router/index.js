@@ -22,6 +22,11 @@ const routes = [
     name: "Register",
     component: () => import("../views/RegisterView.vue"),
   },
+  {
+    path: "/my-books",
+    name: "Mybooks",
+    component: () => import("../views/MyBookView.vue"),
+  },
 ];
 
 const router = createRouter({

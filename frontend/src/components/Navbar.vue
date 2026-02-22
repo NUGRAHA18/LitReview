@@ -25,6 +25,9 @@ const handleLogin = () => {
       <router-link to="/" class="hover:text-dark transition-colors"
         >Home</router-link
       >
+      <router-link to="/my-books" class="hover:text-dark transition-colors"
+        >Koleksi Saya</router-link
+      >
     </div>
 
     <div class="space-x-4 flex items-center">
