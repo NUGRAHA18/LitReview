@@ -7,8 +7,8 @@ export const addReview = async (req, res) => {
 
   try {
     const newReview = await pool.query(
-      "INSERT INTO reviews (user_id, rating, content) VALUES ($1, $2, $3)",
-      [book_id, rating, content],
+      "INSERT INTO reviews (user_id, book_id, rating, content) VALUES ($1, $2, $3, $4)",
+      [user_id, book_id, rating, content],
     );
     res.status(201).json({
       message: "Ulasan berhasil ditambahkan",

@@ -46,7 +46,7 @@ const submitReview = async () => {
   } catch (error) {
     alert(error.response?.data?.message || "Gagal mengirim ulasan");
   } finally {
-    isSubmitting = false;
+    isSubmitting.value = false;
   }
 };
 
