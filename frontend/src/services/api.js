@@ -4,8 +4,10 @@ const openLibraryAPI = axios.create({
   baseURL: "https://openlibrary.org",
 });
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 const backendAPI = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: API_URL,
 });
 
 export const searchBooks = async (query) => {
@@ -84,4 +86,8 @@ export const getMyReadingList = async () => {
   return await backendAPI.get("/reading-list", getAuthHeaders());
 };
 
-// Interceptor untuk menangani token expired secara global
+//hapus buku dari rak
+export const removeFromReadingList = async (bookId) => {
+  const token = localStorage.getItem("token");
+  return await backendAPI.delete("/reading-list/${bookId}", getAuthHeaders());
+};

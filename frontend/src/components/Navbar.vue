@@ -32,15 +32,17 @@ const handleLogin = () => {
 
     <div class="space-x-4 flex items-center">
       <template v-if="isAuthenticated()">
-        <span class="text-sm text-slate-600 font-medium hidden md:block">
-          Halo, <span class="font-bold text-primary">{{ user?.username }}</span>
-        </span>
-        <button
-          @click="handleLogout"
-          class="text-red-500 hover:text-red-700 font-medium transition-colors text-sm px-3 py-2 border border-red-100 rounded-lg hover:bg-red-50"
+        <router-link
+          to="/profile"
+          class="flex items-center gap-2 text-slate-600 hover:text-primary transition-colors font-medium"
         >
-          Logout
-        </button>
+          <div
+            class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm"
+          >
+            {{ user?.username?.charAt(0).toUpperCase() }}
+          </div>
+          <span class="hidden md:block">{{ user?.username }}</span>
+        </router-link>
       </template>
 
       <template v-else>

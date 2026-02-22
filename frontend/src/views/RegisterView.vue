@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { registerUser } from "../services/api";
+import { toast } from "vue3-toastify";
 
 const router = useRouter();
 const form = ref({ username: "", email: "", password: "" });
@@ -16,7 +17,7 @@ const handleRegister = async () => {
     // Memanggil API Register
     await registerUser(form.value);
 
-    alert("Registrasi berhasil! Silakan login dengan akun barumu.");
+    toast.success("Registrasi berhasil! Silakan login dengan akun barumu.");
     router.push("/login"); // Arahkan ke halaman login setelah sukses
   } catch (error) {
     // Menangkap pesan error dari backend (misal: email sudah terpakai)
