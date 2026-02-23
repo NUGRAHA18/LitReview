@@ -1,3 +1,4 @@
+
 # 📚 Book Review Web Application
 
 Aplikasi web _full-stack_ untuk ulasan buku yang memungkinkan pengguna melacak bacaan, memberikan penilaian, dan berinteraksi dengan komunitas pembaca. Proyek ini dikembangkan dengan pendekatan _Software Engineering_ (Agile/Scrum) dan terintegrasi dengan OpenLibrary API.
